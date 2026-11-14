@@ -10,4 +10,8 @@ public abstract class Piece {
     public boolean isAffectedByGravity(){
         return true;
     }
+
+    public boolean fallsToEdge(){
+        return false;
+    }
 }
