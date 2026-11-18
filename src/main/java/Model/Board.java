@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//Functions with no index parameters are 0starters.
+//Functions with no index parameters are 0starter indexing.
 public class Board {
     public static int SIZE=15;
     private Piece[][] board;
@@ -12,11 +12,20 @@ public class Board {
         board=new Piece[SIZE][SIZE];
     }
 
-    //Call with 1starter
+    /**
+     * Places the given piece on the board. As it is called by an outside object, indexing starts at 1.
+     * @param row row of location
+     * @param column column of location
+     * @param newPiece the piece
+     */
     public void place(int row, int column, Piece newPiece){
         board[row-1][column-1]=newPiece;
     }
 
+    /**
+     * Rearranges the board, simulating gravity.
+     * @param dir direction of gravity
+     */
     public void gravity(Direction dir){
         Piece[][] newBoard=new Piece[SIZE][SIZE];
         Piece[] newArray; //Row or column
@@ -43,6 +52,11 @@ public class Board {
         board=newBoard;
     }
 
+    /**
+     * Returns a copy of the board's column.
+     * @param colNum index of the column
+     * @return a COPY
+     */
     private Piece[] getColumn(int colNum){
         Piece[] column=new Piece[SIZE];
         for (int i=0; i<SIZE; i++)
@@ -50,26 +64,48 @@ public class Board {
         return column;
     }
 
+    /**
+     * Returns a copy of the board's column.
+     * @param rowNum index of the row
+     * @return A COPY
+     */
     private Piece[] getRow(int rowNum) {
         return Arrays.copyOf(board[rowNum], SIZE);
     }
 
+    /**
+     * Copies the content of the given column to the given part of the given grid.
+     * @param grid the grid to be altered
+     * @param newColumn the values to be copied
+     * @param colNum the index of the altered column
+     */
     private static void setColumn(Piece[][] grid, Piece[] newColumn, int colNum){
         for (int i=0; i<SIZE; i++)
             grid[i][colNum]=newColumn[i];
     }
 
+    /**
+     * Sets the given row to be the given part of the given grid.
+     * @param grid the grid to be altered
+     * @param newRow new row array
+     * @param rowNum the index of the altered row
+     */
     private static void setRow(Piece[][] grid, Piece[] newRow, int rowNum){
         grid[rowNum]=newRow;
     }
 
-    private static List<Piece[]> segment(Piece[] column){
+    /**
+     * Segments the given array.
+     * @param array
+     * @return A list of arrays. A segment is an interval between one concrete and another. Each concrete gets their own segment.
+     */
+    private static List<Piece[]> segment(Piece[] array){
         List<Piece[]> segmented=new ArrayList<>();
         int segmentStart=0;  //
         int segmentEnd=0;    //These are inclusive    [end,start] is a segment
         while (segmentStart<SIZE){
             for (int i=segmentStart; i<SIZE; i++){
-                if (column[i]!=null && !column[i].isAffectedByGravity()){
+                if (array[i]!=null && !array[i].isAffectedByGravity()){
                     break;
                 }
                 segmentEnd=i;
@@ -78,7 +114,7 @@ public class Board {
             int segmentLength=segmentEnd-segmentStart+1;
             Piece[] segment=new Piece[segmentLength];
             for (int i=0; i<segmentLength; i++){
-                segment[i]=column[segmentStart+i];
+                segment[i]=array[segmentStart+i];
             }
             segmented.add(segment);
             segmentStart=segmentEnd+1; //The new segment starts from the next spot
@@ -90,7 +126,7 @@ public class Board {
     /**
      * Rearranges an array as gravity to the left.
      * If right gravity is needed, reverse the array, call this function, then reverse it again.
-     * @param column The array to be rearranged
+     * @param array The array to be rearranged
      * @return A rearranged copy of the array.
      */
     private static Piece[] rearrangeArray(Piece[] array){
