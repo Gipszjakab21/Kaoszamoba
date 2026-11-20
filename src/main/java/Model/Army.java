@@ -15,4 +15,12 @@ public class Army {
         pieces.put(CHAMELEON, numOfChameleons);
         pieces.put(BLINDSPOT, numOfBlindspots);
     }
+
+    public boolean usePiece(PieceType type){
+        int count=pieces.get(type);
+        if (count==0)
+            return false;
+        pieces.put(type, count-1);
+        return true;
+    }
 }

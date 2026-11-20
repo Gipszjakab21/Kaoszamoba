@@ -14,4 +14,11 @@ public abstract class Piece {
     public boolean fallsToEdge(){
         return false;
     }
+
+    public abstract PieceType getType();
+
+    //TODO
+    public Player getOwner(){
+        return owner;
+    }
 }

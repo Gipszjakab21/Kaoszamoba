@@ -10,4 +10,9 @@ public class Concrete extends Piece {
     public boolean isAffectedByGravity(){
         return false;
     }
+
+    @Override
+    public PieceType getType(){
+        return PieceType.CONCRETE;
+    }
 }

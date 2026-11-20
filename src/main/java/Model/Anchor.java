@@ -10,4 +10,9 @@ public class Anchor extends Piece {
     public boolean fallsToEdge(){
         return true;
     }
+
+    @Override
+    public PieceType getType(){
+        return PieceType.ANCHOR;
+    }
 }

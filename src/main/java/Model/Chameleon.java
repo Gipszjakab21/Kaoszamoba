@@ -9,4 +9,9 @@ public class Chameleon extends Piece {
     public void setOwner(Player owner){
         this.owner=owner;
     }
+
+    @Override
+    public PieceType getType(){
+        return PieceType.CHAMELEON;
+    }
 }

@@ -18,7 +18,9 @@ public class Board {
      * @param column column of location
      * @param newPiece the piece
      */
-    public void place(int row, int column, Piece newPiece){
+    public void place(int row, int column, Piece newPiece) throws IllegalArgumentException{
+        if (row>SIZE || row<1 || column>SIZE || column<1)
+            throw new IllegalArgumentException();
         board[row-1][column-1]=newPiece;
     }
 
@@ -161,7 +163,7 @@ public class Board {
 
     /**
      * Reverses an array.
-     * @param array Original arry
+     * @param array Original array
      * @return A reversed copy
      */
     private static Piece[] reverse(Piece[] array){
@@ -169,5 +171,43 @@ public class Board {
         for (int i=0; i<array.length; i++)
             reversedArray[array.length-i-1]=array[i];
         return reversedArray;
+    }
+
+    //TODO
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public void print(Player player1){
+        System.out.println("---------------------");
+        for (int i=0; i<SIZE; i++){
+            for (int j=0; j<SIZE; j++){
+                if (board[i][j]==null){
+                    System.out.print(" ");
+                    continue;
+                }
+                char letter;
+                switch (board[i][j].getType()){
+                    case SIMPLE:
+                        letter='s';
+                        break;
+                    case CONCRETE:
+                        letter='c';
+                        break;
+                    case CHAMELEON:
+                        letter='x';
+                        break;
+                    default:
+                        letter='a';
+                        break;
+                }
+                if(board[i][j].getOwner()==player1)
+                    System.out.print(RED+letter+RESET);
+                else
+                    System.out.print(GREEN+letter+RESET);
+
+            }
+            System.out.print('\n');
+        }
+        System.out.println("---------------------");
     }
 }
