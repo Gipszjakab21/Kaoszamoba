@@ -22,13 +22,13 @@ public class Player {
         blindspots.add(new Coordinate(row, column));
     }
 
-    //nested class, holds the coordinates for the Blindspots. Indexing starts with 0.
-    public class Coordinate{
-        private final int row;
-        private final int column;
-        public Coordinate(int row, int column){
-            this.row=row;
-            this.column=column;
-        }
+    /**
+     * Clears the list while returning its content.
+     * @return The copy of the list.
+     */
+    public List<Coordinate> emptyBlindspots(){
+        List<Coordinate> copy=new ArrayList<>(blindspots);
+        blindspots.clear();
+        return copy;
     }
 }

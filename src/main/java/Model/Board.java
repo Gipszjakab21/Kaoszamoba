@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//Functions with no index parameters are 0starter indexing.
 public class Board {
     public static int SIZE=15;
     private Piece[][] board;
@@ -13,15 +12,15 @@ public class Board {
     }
 
     /**
-     * Places the given piece on the board. As it is called by an outside object, indexing starts at 1.
+     * Places the given piece on the board. Indexing starts at 0.
      * @param row row of location
      * @param column column of location
      * @param newPiece the piece
      */
     public void place(int row, int column, Piece newPiece) throws IllegalArgumentException{
-        if (row>SIZE || row<1 || column>SIZE || column<1)
+        if (row>=SIZE || row<0 || column>=SIZE || column<0)
             throw new IllegalArgumentException();
-        board[row-1][column-1]=newPiece;
+        board[row][column]=newPiece;
     }
 
     /**
