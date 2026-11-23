@@ -172,6 +172,12 @@ public class Board {
         return reversedArray;
     }
 
+    /**
+     * Checks if a player won. 
+     * @param player1 The first player of the game
+     * @param player2 The second player of the game
+     * @return The reference of the winning player or none
+     */
     public Player checkWin(Player player1, Player player2){
         int p1_counter=0;
         int p2_counter=0;
