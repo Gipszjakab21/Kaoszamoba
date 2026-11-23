@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Board {
-    public static int SIZE=15;
+    public static int SIZE=15;  //Has to be at least five
     private Piece[][] board;
 
     public Board(){
@@ -161,7 +161,7 @@ public class Board {
     }
 
     /**
-     * Reverses an array.
+     * Returns a reversed version of an array.
      * @param array Original array
      * @return A reversed copy
      */
@@ -172,12 +172,176 @@ public class Board {
         return reversedArray;
     }
 
+    public Player checkWin(Player player1, Player player2){
+        int p1_counter=0;
+        int p2_counter=0;
+        int row=0;
+        int column=0;
+        //horizontal check
+        for (; row<SIZE; row++){
+            column=0;
+            for(; column<SIZE; column++){
+                if (board[row][column]==null){
+                    p1_counter=0;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player1){
+                    p1_counter++;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player2){
+                    p1_counter=0;
+                    p2_counter++;
+                }
+                if (p1_counter==5)
+                    return player1;
+                else if (p2_counter==5)
+                    return player2;
+            }
+            p1_counter=0;
+            p2_counter=0;
+        }
+        //vertical check (We learned about this being inefficient because of memory layout, but I cannot think of anything better.)
+        row=0;
+        column=0;
+        for (; column<SIZE; column++){
+            row=0;
+            for (; row<SIZE; row++){
+                if (board[row][column]==null){
+                    p1_counter=0;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player1){
+                    p1_counter++;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player2){
+                    p1_counter=0;
+                    p2_counter++;
+                }
+                if (p1_counter==5)
+                    return player1;
+                else if (p2_counter==5)
+                    return player2;
+            }
+            p1_counter=0;
+            p2_counter=0;
+        }
+        //bottom left to upper right
+        for (int startingRow=SIZE-1; startingRow>=0;startingRow--){
+            row=startingRow;
+            column=0;
+            while (row>=0){
+                if (board[row][column]==null){
+                    p1_counter=0;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player1){
+                    p1_counter++;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player2){
+                    p1_counter=0;
+                    p2_counter++;
+                }
+                if (p1_counter==5)
+                    return player1;
+                else if (p2_counter==5)
+                    return player2;
+                row--;
+                column++;
+            }
+            p1_counter=0;
+            p2_counter=0;
+        }
+        for (int startingColumn=1; startingColumn<SIZE; startingColumn++){
+            row=SIZE-1;
+            column=startingColumn;
+            while (column<SIZE){
+                if (board[row][column]==null){
+                    p1_counter=0;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player1){
+                    p1_counter++;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player2){
+                    p1_counter=0;
+                    p2_counter++;
+                }
+                if (p1_counter==5)
+                    return player1;
+                else if (p2_counter==5)
+                    return player2;
+                row--;
+                column++;
+            }
+            p1_counter=0;
+            p2_counter=0;
+        }
+        //Top left to bottom right
+        for (int startingColumn=0; startingColumn<SIZE; startingColumn++){
+            row=0;
+            column=startingColumn;
+            while (column<SIZE){
+                if (board[row][column]==null){
+                    p1_counter=0;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player1){
+                    p1_counter++;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player2){
+                    p1_counter=0;
+                    p2_counter++;
+                }
+                if (p1_counter==5)
+                    return player1;
+                else if (p2_counter==5)
+                    return player2;
+                row++;
+                column++;
+            }
+            p1_counter=0;
+            p2_counter=0;
+        }
+        for (int startingRow=1; startingRow<SIZE; startingRow++){
+            row=startingRow;
+            column=0;
+            while (row<SIZE){
+                if (board[row][column]==null){
+                    p1_counter=0;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player1){
+                    p1_counter++;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player2){
+                    p1_counter=0;
+                    p2_counter++;
+                }
+                if (p1_counter==5)
+                    return player1;
+                else if (p2_counter==5)
+                    return player2;
+                row++;
+                column++;
+            }
+            p1_counter=0;
+            p2_counter=0;
+        }
+        return null;
+    }
+
     //TODO
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
     public void print(Player player1){
-        System.out.println("---------------------");
+        System.out.println("---------------");
         for (int i=0; i<SIZE; i++){
             for (int j=0; j<SIZE; j++){
                 if (board[i][j]==null){
@@ -207,6 +371,6 @@ public class Board {
             }
             System.out.print('\n');
         }
-        System.out.println("---------------------");
+        System.out.println("---------------");
     }
 }
