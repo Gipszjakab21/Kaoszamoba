@@ -251,6 +251,8 @@ public class Board {
                 row--;
                 column++;
             }
+            p1_counter=0;
+            p2_counter=0;
         }
         for (int startingColumn=1; startingColumn<SIZE; startingColumn++){
             row=SIZE-1;
@@ -275,8 +277,62 @@ public class Board {
                 row--;
                 column++;
             }
+            p1_counter=0;
+            p2_counter=0;
         }
         //Top left to bottom right
+        for (int startingColumn=0; startingColumn<SIZE; startingColumn++){
+            row=0;
+            column=startingColumn;
+            while (column<SIZE){
+                if (board[row][column]==null){
+                    p1_counter=0;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player1){
+                    p1_counter++;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player2){
+                    p1_counter=0;
+                    p2_counter++;
+                }
+                if (p1_counter==5)
+                    return player1;
+                else if (p2_counter==5)
+                    return player2;
+                row++;
+                column++;
+            }
+            p1_counter=0;
+            p2_counter=0;
+        }
+        for (int startingRow=1; startingRow<SIZE; startingRow++){
+            row=startingRow;
+            column=0;
+            while (row<SIZE){
+                if (board[row][column]==null){
+                    p1_counter=0;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player1){
+                    p1_counter++;
+                    p2_counter=0;
+                }
+                else if (board[row][column].getOwner()==player2){
+                    p1_counter=0;
+                    p2_counter++;
+                }
+                if (p1_counter==5)
+                    return player1;
+                else if (p2_counter==5)
+                    return player2;
+                row++;
+                column++;
+            }
+            p1_counter=0;
+            p2_counter=0;
+        }
         return null;
     }
 
@@ -316,11 +372,5 @@ public class Board {
             System.out.print('\n');
         }
         System.out.println("---------------");
-    }
-
-    //TODO
-    public static void main(){
-        Board b=new Board();
-        b.checkWin(null, null);
     }
 }
