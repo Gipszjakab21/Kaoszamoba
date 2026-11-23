@@ -7,14 +7,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class GameArchive {
     private final List<GameRecord> gameList;
 
     public GameArchive() {
-        gameList = new ArrayList<>();
+        gameList = new LinkedList<>();
     }
 
     /**
@@ -35,6 +35,7 @@ public class GameArchive {
             bw.write("------------------------------------");
             bw.newLine();
             }
+        bw.close();
     }
 
     /**
@@ -63,6 +64,7 @@ public class GameArchive {
                 System.out.println("A record could not be processed, skipping");
             }
         }
+        br.close();
     }
 
     /**
@@ -73,19 +75,39 @@ public class GameArchive {
         gameList.add(newRecord);
     }
 
+    /**
+     * Returns the reference of the game archive.
+     * @return Reference to the list of games
+     */
+    public List<GameRecord> getGameList(){
+        return gameList;
+    }
+
     // Nested class, contains the info of one game for statistical analysis (e.g.
     // rankings)
     public static class GameRecord {
         private final String player1;
         private final String player2;
         private final LocalDate date;
-        private final boolean winner; // 0->player1 won 1->player2 won
+        private final boolean winner; // false->player1 won   true->player2 won
 
         public GameRecord(String name1, String name2, LocalDate date, boolean winner) {
             this.player1 = name1;
             this.player2 = name2;
             this.date = date;
             this.winner = winner;
+        }
+
+        public String getPlayer1(){
+            return player1;
+        }
+
+        public String getPlayer2(){
+            return player2;
+        }
+
+        public boolean getWinner(){
+            return winner;
         }
     }
 }
