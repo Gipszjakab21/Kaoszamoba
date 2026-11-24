@@ -28,9 +28,10 @@ public class Game {
         this.current=player1;
     }
 
-    public void play(){
+    public boolean play(){
         newGravityParameters();
         Scanner s=new Scanner(System.in);
+        Player winner=null;
         int i=0;
         do {
                 System.out.print("Row: ");
@@ -78,16 +79,17 @@ public class Game {
                 board.gravity(nextGravDir);
                 newGravityParameters();
             }
-            System.out.printf("Dir: %s in %d steps%n%n%n", nextGravDir.toString(), nextGravSteps);
             board.print(player1);
+            System.out.printf("Dir: %s in %d steps%n%n%n", nextGravDir.toString(), nextGravSteps);
             i++;
-        } while (i<30);
-        s.close();
+            winner=board.checkWin(player1, player2);
+        } while (winner==null);
+        return winner==player2;
     }
 
     private void newGravityParameters(){
         nextGravDir=Direction.values()[random.nextInt(0, 4)];
-        nextGravSteps=random.nextInt(4,5);
+        nextGravSteps=random.nextInt(10,20);
     }
 
     public static void main(String[] args){

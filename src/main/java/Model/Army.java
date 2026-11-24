@@ -22,6 +22,14 @@ public class Army {
         pieces.put(BLINDSPOT, numOfBlindspots);
     }
 
+    public Army(Army copied){
+        pieces=new EnumMap<>(PieceType.class);
+        pieces.put(ANCHOR, copied.pieces.get(ANCHOR));
+        pieces.put(CONCRETE, copied.pieces.get(CONCRETE));
+        pieces.put(CHAMELEON, copied.pieces.get(CHAMELEON));
+        pieces.put(BLINDSPOT, copied.pieces.get(BLINDSPOT));
+    }
+
     public boolean usePiece(PieceType type){
         int count=pieces.get(type);
         if (count==0)

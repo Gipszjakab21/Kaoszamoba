@@ -16,6 +16,9 @@ public class Leaderboard {
         this.archive=archive;
     }
 
+    /**
+     * Updates the leaderboard based on the archive given in the constructor.
+     */
     public void build(){
         HashMap<String, Integer> pointMap=new HashMap<>();
         List<GameRecord> games=archive.getGameList();
@@ -49,6 +52,15 @@ public class Leaderboard {
         for (int i=0; i<10 && i<fullLeaderboard.size(); i++){
             leaderboard.add(fullLeaderboard.get(i));
         }
+    }
+
+    //TODO
+    public void print(){
+        System.out.print("\n\n\n");
+        for (LeaderboardRecord i : leaderboard){
+            System.out.printf("%d %s\n", i.score, i.name);
+        }
+        System.out.print("\n\n\n");
     }
 
     //Nested class, an entry of the leaderboard.
