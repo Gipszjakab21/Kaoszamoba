@@ -17,7 +17,10 @@ public abstract class Piece {
 
     public abstract PieceType getType();
 
-    //TODO
+    public void changeOwner(Player newOwner){
+        //Void, it is a polymorph method, only the Chameleon changes owner
+    }
+
     public Player getOwner(){
         return owner;
     }

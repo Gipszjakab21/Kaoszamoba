@@ -34,7 +34,8 @@ public class Main {
             }
             switch (option){
                 case 1:
-                    String name1, name2;
+                    String name1;
+                    String name2;
                     System.out.println("Az első játékos neve: ");
                     name1=scan.nextLine();
                     System.out.println("A második játékos neve: ");

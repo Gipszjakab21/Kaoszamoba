@@ -30,6 +30,7 @@ public class Game {
 
     public boolean play(){
         newGravityParameters();
+        int chameleonSwitchSteps=random.nextInt(10, 16); //The remaining steps until the chameleons switch owners
         Scanner s=new Scanner(System.in);
         Player winner=null;
         int i=0;
@@ -73,20 +74,29 @@ public class Game {
                         board.place(c.getRow(), c.getColumn(), new Simple(current));
                     }
                 }
-            current= current==player1 ? player2 : player1;
+            chameleonSwitchSteps--;
+            if (chameleonSwitchSteps==0){
+                board.chameleonSwitch(player1, player2);
+                chameleonSwitchSteps=random.nextInt(10, 16);
+            }
             nextGravSteps--;
             if (nextGravSteps==0){
                 board.gravity(nextGravDir);
                 newGravityParameters();
             }
             board.print(player1);
-            System.out.printf("Dir: %s in %d steps%n%n%n", nextGravDir.toString(), nextGravSteps);
+            System.out.printf("Dir: %s in %d steps%n", nextGravDir.toString(), nextGravSteps);
+            System.out.printf("Chameleons switch in %d steps%n%n%n", chameleonSwitchSteps);
             i++;
             winner=board.checkWin(player1, player2);
+            current= current==player1 ? player2 : player1;
         } while (winner==null);
         return winner==player2;
     }
 
+    /**
+     * Configures the next gravity fall.
+     */
     private void newGravityParameters(){
         nextGravDir=Direction.values()[random.nextInt(0, 4)];
         nextGravSteps=random.nextInt(10,20);

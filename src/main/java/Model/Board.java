@@ -342,6 +342,18 @@ public class Board {
         return null;
     }
 
+    /**
+     * Sets new owner for all chameleons on the board.
+     */
+    public void chameleonSwitch(Player player1, Player player2){
+        for (int row=0; row<SIZE; row++){
+            for (int column=0; column<SIZE; column++){
+                if (board[row][column]!=null)
+                    board[row][column].changeOwner( board[row][column].getOwner()==player1 ? player2 : player1 );
+            }
+        }
+    }
+
     //TODO
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
