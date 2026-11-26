@@ -2,6 +2,7 @@ package Model;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,8 +43,8 @@ public class GameArchive {
      * Loads the records from archive.txt
      * @throws IOException When the file does not exist
      */
-    public void loadArchive() throws IOException{
-        BufferedReader br=new BufferedReader(new FileReader("archive.txt"));
+    public void loadArchive(File sourceFile) throws IOException{
+        BufferedReader br=new BufferedReader(new FileReader(sourceFile));
         String name1;
         String name2;
         String date;

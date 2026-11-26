@@ -9,7 +9,7 @@ public class Main {
     public static void main(){
         GameArchive archive=new GameArchive();
         try{
-            archive.loadArchive();
+            archive.loadArchive(new File("archive.txt"));
         } catch (IOException e){
             System.out.println("Hiba az archívum betöltésénél.");
         }
@@ -64,5 +64,6 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Hiba a kiíráskor.");
         }
+        scan.close();
     }
 }

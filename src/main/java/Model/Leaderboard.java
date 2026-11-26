@@ -16,6 +16,10 @@ public class Leaderboard {
         this.archive=archive;
     }
 
+    public List<LeaderboardRecord> getLeaderboard(){
+        return leaderboard;
+    }
+
     /**
      * Updates the leaderboard based on the archive given in the constructor.
      */
@@ -64,7 +68,7 @@ public class Leaderboard {
     }
 
     //Nested class, an entry of the leaderboard.
-    private class LeaderboardRecord{
+    public class LeaderboardRecord{
         private final String name;
         private final int score;
 
@@ -75,6 +79,10 @@ public class Leaderboard {
 
         public int getScore(){
             return score;
+        }
+
+        public String getName(){
+            return name;
         }
     }
 }
