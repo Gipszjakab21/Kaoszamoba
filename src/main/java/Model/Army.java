@@ -73,4 +73,8 @@ public class Army {
         bw.write("Vakfolt\n"+pieces.get(BLINDSPOT));
         bw.close();
     }
+
+    public Map<PieceType, Integer> getPieceMap(){
+        return pieces;
+    }
 }

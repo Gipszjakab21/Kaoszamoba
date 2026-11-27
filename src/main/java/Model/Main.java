@@ -10,14 +10,14 @@ public class Main {
         GameArchive archive=new GameArchive();
         try{
             archive.loadArchive(new File("archive.txt"));
-        } catch (IOException e){
+        } catch (IOException _){
             System.out.println("Hiba az archívum betöltésénél.");
         }
         Leaderboard lb=new Leaderboard(archive);
         Army defArmy=new Army(0,0,0,0);
         try {
             defArmy.load(new File("defArmyConfig.txt"));
-        } catch (IOException e) {
+        } catch (IOException _) {
             System.out.println("Hiba a sereg betöltésénél. Alapértelmezett értékek lépnek életbe.");
             defArmy=new Army(2,2,2,2);
         }
@@ -61,7 +61,7 @@ public class Main {
         try {
             defArmy.save(new File("defArmyConfig.txt"));
             archive.saveArchive();
-        } catch (IOException e) {
+        } catch (IOException _) {
             System.out.println("Hiba a kiíráskor.");
         }
         scan.close();

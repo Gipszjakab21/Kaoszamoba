@@ -1,22 +1,20 @@
 package View;
 
-import java.awt.LayoutManager;
-import java.awt.Menu;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.LayoutFocusTraversalPolicy;
 
-import Model.GameArchive;
-import Model.GameArchive.GameRecord;
+import Controller.Actions;
 
 public class MenuPanel extends JPanel {
-    public MenuPanel(Runnable toLeaderBoard){
+    public MenuPanel(Actions actions){
         
         JButton leaderboardButton=new JButton("Toplista");
-        leaderboardButton.addActionListener(e->toLeaderBoard.run());
+        leaderboardButton.addActionListener( e->actions.toLeaderBoard() );
+
+        JButton armyButton=new JButton("Sereg beállítása");
+        armyButton.addActionListener( e->actions.toArmy() );
 
         add(leaderboardButton);
+        add(armyButton);
     }
 }
