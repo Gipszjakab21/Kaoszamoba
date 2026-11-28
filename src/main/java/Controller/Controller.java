@@ -58,6 +58,17 @@ public class Controller implements Actions {
         defaultArmy=newArmy;
     }
 
+    @Override
+    public void loadArmy(String fileName){
+        try {
+            defaultArmy.load(new File(fileName+".txt"));
+            mf.showPanel("ARMY"); //The panel is already ARMY, but it needs to refresh
+            mf.armyPanelIOFeedback(true);
+        } catch (IOException _) {
+            mf.armyPanelIOFeedback(false);
+        }
+    }
+
     public static void main(){
         GameArchive archive=new GameArchive();
         try {

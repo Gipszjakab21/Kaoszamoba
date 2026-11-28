@@ -1,6 +1,9 @@
 package View;
 
 import java.awt.CardLayout;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -21,7 +24,9 @@ public class MainFrame extends JFrame {
         super("Nemnewtoni Káoszamőba");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(700, 700);
-        this.actions=actions;
+        setLocationRelativeTo(null);
+
+        this.actions=actions;        
 
         menuPanel=new MenuPanel(actions);
 
@@ -44,5 +49,9 @@ public class MainFrame extends JFrame {
             armyPanel.refresh(actions.getDefArmy());
         
         cardLayout.show(panelDeck, nameOfPanel);
+    }
+
+    public void armyPanelIOFeedback(boolean success){
+        armyPanel.showIOFeedback(success);
     }
 }

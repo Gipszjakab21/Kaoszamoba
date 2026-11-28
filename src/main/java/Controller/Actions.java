@@ -12,4 +12,5 @@ public interface Actions {
     public Army getDefArmy();
     public List<LeaderboardRecord> getLeaderboard();
     public void saveDefArmy(Army newArmy);
+    public void loadArmy(String fileName);
 }
